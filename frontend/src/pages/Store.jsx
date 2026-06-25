@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingCart, Package, Tag, PlusCircle, Trash2, Edit2, X, Plus, Minus } from 'lucide-react';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = import.meta.env.VITE_API_URL;
 const MOCK_TOKEN = 'mock-token';
 
 function Store() {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Users, CheckSquare, Store, CreditCard, CloudSun, Bot, Activity } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import './Sidebar.css';
 
 const navItems = [
@@ -15,6 +16,8 @@ const navItems = [
 ];
 
 function Sidebar() {
+  const { user } = useAuth();
+
   return (
     <aside className="sidebar glass-panel" style={{ borderRadius: '0 16px 16px 0', borderLeft: 'none' }}>
       <div className="sidebar-header" style={{ marginBottom: '32px' }}>
@@ -23,7 +26,12 @@ function Sidebar() {
         </h2>
       </div>
       <nav className="sidebar-nav">
-        {navItems.map((item) => (
+        {navItems.filter(item => {
+          if ((item.path === '/users' || item.path === '/monitoring') && user?.role !== 'ADMIN') {
+            return false;
+          }
+          return true;
+        }).map((item) => (
           <NavLink
             key={item.path}
             to={item.path}

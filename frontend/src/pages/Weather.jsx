@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Cloud, Search, Wind, Droplets, MapPin, Sun, CloudRain } from 'lucide-react';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Weather() {
   const [city, setCity] = useState('');

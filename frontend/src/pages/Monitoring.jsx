@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Activity, Cpu, Server, ShieldCheck, Terminal, RefreshCw, Clock } from 'lucide-react';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Monitoring() {
   const [metrics, setMetrics] = useState(null);

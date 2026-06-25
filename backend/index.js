@@ -24,7 +24,22 @@ const limiter = rateLimit({
 app.use(helmet({
   contentSecurityPolicy: false, // Desactivado para no interferir con swagger en local
 }));
-app.use(cors());
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+  'http://localhost:4173',
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 app.use(express.json());
 app.use('/api', limiter);
 
