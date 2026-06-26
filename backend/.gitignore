@@ -3,4 +3,3 @@ node_modules/
 dev.db
 *.db
 dist/
-prisma/migrations/
