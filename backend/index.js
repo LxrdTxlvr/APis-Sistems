@@ -9,7 +9,9 @@ const { rateLimit } = require('express-rate-limit');
 dotenv.config();
 
 const app = express();
+app.set('trust proxy', 1);
 const port = process.env.PORT || 3000;
+
 
 // Configurar Rate Limiter
 const limiter = rateLimit({
