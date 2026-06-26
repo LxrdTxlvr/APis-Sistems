@@ -108,7 +108,7 @@ function parseMarkdown(text) {
 
 function AI() {
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: '¡Hola! Soy Gemini 1.5, tu asistente inteligente. ¿En qué puedo ayudarte con este proyecto?' }
+    { sender: 'bot', text: '¡Hola! Soy Gemini, tu asistente de IA. ¿En qué puedo ayudarte?' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -133,19 +133,19 @@ function AI() {
   };
 
   return (
-    <div className="glass-panel" style={{height: '100%', display: 'flex', flexDirection: 'column', animation: 'slideUp 0.4s ease-out'}}>
-      <div style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px'}}>
+    <div className="glass-panel" style={{ height: '100%', display: 'flex', flexDirection: 'column', animation: 'slideUp 0.4s ease-out' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
         <Sparkles size={28} color="var(--accent-secondary)" />
         <div>
-          <h1 style={{margin: 0}}>Asistente IA (Gemini)</h1>
-          <p style={{marginTop: '4px'}}>Interactúa con el modelo de lenguaje de Google.</p>
+          <h1 style={{ margin: 0 }}>Asistente IA (Gemini)</h1>
+          <p style={{ marginTop: '4px' }}>Interactúa con el modelo de lenguaje de Google.</p>
         </div>
       </div>
 
-      <div className="glass-panel" style={{flex: 1, display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden'}}>
+      <div className="glass-panel" style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden' }}>
 
         {/* Historial de Chat */}
-        <div style={{flex: 1, padding: '24px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px'}}>
+        <div style={{ flex: 1, padding: '24px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {messages.map((msg, idx) => (
             <div key={idx} style={{
               display: 'flex',
@@ -164,7 +164,7 @@ function AI() {
                 justifyContent: 'center',
                 flexShrink: 0
               }}>
-                {msg.sender === 'user' ? <User size={20} color="white"/> : <Bot size={20} color="white"/>}
+                {msg.sender === 'user' ? <User size={20} color="white" /> : <Bot size={20} color="white" />}
               </div>
               <div style={{
                 background: msg.sender === 'user' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255,255,255,0.05)',
@@ -181,13 +181,13 @@ function AI() {
             </div>
           ))}
           {loading && (
-            <div style={{display: 'flex', gap: '12px', alignItems: 'flex-start'}}>
-              <div style={{background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '50%', flexShrink: 0}}>
-                <Bot size={20} color="white"/>
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+              <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '50%', flexShrink: 0 }}>
+                <Bot size={20} color="white" />
               </div>
-              <div style={{padding: '16px', display: 'flex', alignItems: 'center', gap: '8px'}}>
+              <div style={{ padding: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 Escribiendo...
-                <div className="loading-spinner" style={{width: '14px', height: '14px', borderWidth: '2px'}}></div>
+                <div className="loading-spinner" style={{ width: '14px', height: '14px', borderWidth: '2px' }}></div>
               </div>
             </div>
           )}
@@ -204,7 +204,7 @@ function AI() {
           <input
             type="text"
             className="input-field"
-            style={{flex: 1, borderRadius: '24px', paddingLeft: '24px'}}
+            style={{ flex: 1, borderRadius: '24px', paddingLeft: '24px' }}
             placeholder="Escribe tu mensaje para Gemini..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -212,7 +212,7 @@ function AI() {
           <button
             type="submit"
             className="btn btn-primary"
-            style={{borderRadius: '24px', padding: '0 24px'}}
+            style={{ borderRadius: '24px', padding: '0 24px' }}
             disabled={loading}
           >
             <Send size={18} />

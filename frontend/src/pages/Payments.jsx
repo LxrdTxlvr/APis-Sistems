@@ -24,13 +24,13 @@ function Payments() {
       const res = await axios.post(`${API_URL}/payments/process`, { orderId }, {
         headers: { Authorization: `Bearer mock-token` }
       }).catch(e => {
-        if(e.response) throw new Error(e.response.data.error || 'Error procesando pago');
+        if (e.response) throw new Error(e.response.data.error || 'Error procesando pago');
         throw e;
       });
-      
+
       setStatus('success');
       setMessage(res.data.message || 'El pago ha sido aprobado exitosamente.');
-      if(res.data.url) {
+      if (res.data.url) {
         // Redirigir a stripe
         window.location.href = res.data.url;
       }
@@ -41,34 +41,34 @@ function Payments() {
   };
 
   return (
-    <div className="glass-panel" style={{animation: 'slideUp 0.4s ease-out'}}>
+    <div className="glass-panel" style={{ animation: 'slideUp 0.4s ease-out' }}>
       <h1>Terminal de Pagos (Stripe)</h1>
-      <p>Introduce un ID de Pedido para simular un Checkout o conectarse a la API de Stripe.</p>
-      
-      <div style={{marginTop: '32px', display: 'flex', gap: '24px', flexWrap: 'wrap'}}>
-        
-        <div className="glass-panel" style={{flex: '1 1 400px'}}>
-          <div style={{display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '24px'}}>
-            <div style={{background: 'rgba(99,102,241,0.2)', padding: '12px', borderRadius: '12px'}}>
+      <p>Introduce un ID de pedido para procesar la compra y conectarse a la API de Stripe.</p>
+
+      <div style={{ marginTop: '32px', display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+
+        <div className="glass-panel" style={{ flex: '1 1 400px' }}>
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '24px' }}>
+            <div style={{ background: 'rgba(99,102,241,0.2)', padding: '12px', borderRadius: '12px' }}>
               <CreditCard size={24} color="var(--accent-primary)" />
             </div>
             <h3>Pagar Pedido</h3>
           </div>
-          
+
           <div className="input-group">
             <label>ID del Pedido</label>
-            <input 
-              type="text" 
-              className="input-field" 
-              placeholder="Ej. 1" 
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Ej. 1"
               value={orderId}
               onChange={(e) => setOrderId(e.target.value)}
             />
           </div>
-          
-          <button 
-            className="btn btn-primary" 
-            style={{width: '100%', marginTop: '16px', height: '48px'}}
+
+          <button
+            className="btn btn-primary"
+            style={{ width: '100%', marginTop: '16px', height: '48px' }}
             onClick={handleProcessPayment}
             disabled={status === 'loading'}
           >
@@ -77,16 +77,16 @@ function Payments() {
         </div>
 
         {status && status !== 'loading' && (
-          <div className="glass-panel" style={{flex: '1 1 300px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', border: `1px solid ${status === 'success' ? 'var(--success)' : 'var(--danger)'}`}}>
+          <div className="glass-panel" style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', border: `1px solid ${status === 'success' ? 'var(--success)' : 'var(--danger)'}` }}>
             {status === 'success' ? (
-              <ShieldCheck size={64} color="var(--success)" style={{marginBottom: '16px'}} />
+              <ShieldCheck size={64} color="var(--success)" style={{ marginBottom: '16px' }} />
             ) : (
-              <AlertCircle size={64} color="var(--danger)" style={{marginBottom: '16px'}} />
+              <AlertCircle size={64} color="var(--danger)" style={{ marginBottom: '16px' }} />
             )}
-            <h3 style={{color: status === 'success' ? 'var(--success)' : 'var(--danger)'}}>
+            <h3 style={{ color: status === 'success' ? 'var(--success)' : 'var(--danger)' }}>
               {status === 'success' ? 'Pago Exitoso' : 'Transacción Rechazada'}
             </h3>
-            <p style={{marginTop: '8px'}}>{message}</p>
+            <p style={{ marginTop: '8px' }}>{message}</p>
           </div>
         )}
       </div>
